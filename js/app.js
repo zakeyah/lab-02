@@ -1,14 +1,11 @@
-//you should have constructor
-//then you should have a method for renderning 
+'use strect';
+const keywordsArr=[];
 
-// new array -> put the unique keywords try to use include keywords then use thei array to put the optioon
-//array.include continue 
-
-function Things (title,url,description,keyword){
-  this.title=title,
-  this.url=url,
-  this.description=description,
-  this.keyword=keyword,
+function Things (item){
+  this.title=item.title,
+  this.image_url=item.image_url,
+  this.description=item.description,
+  this.keyword=item.keyword,
   Things.all.push(this);
 }
 Things.all=[];
@@ -16,18 +13,15 @@ console.log(Things.all);
 Things.prototype.render= function(){
   $('ul').append(`<li>
              <h2>${this.title}</h2>
-            <img src="${this.url}" alt="">
+            <img src="${this.image_url}" alt="">
             <p>${this.description}</p>
             </li>`);
 };
 
 Things.prototype.renderOptions= function(){
-  const arr =[];
-  if(arr.includes(this.keyword)){
-    //   continue;
-  }else{
+  if(!(keywordsArr.includes(this.keyword))){
     $('select').append(`<option>${this.keyword}</option>`);
-    arr.push(this.keyword);
+    keywordsArr.push(this.keyword);
   }
 };
 
@@ -41,26 +35,22 @@ $(document).ready(function () {
   $.ajax('../data/page-1.json', ajaxSettings)
     .then(data => {
       data.forEach(images => {
-        let item = new Things(images.title,images.image_url,images.description,images.keyword);
+        let item = new Things(images);
         item.render();
         item.renderOptions();
       });
     });
 
   $('select').on('click', function() {
-    const newArr=[];
     let selectedValue = $(this).val();
-    newArr.push(selectedValue);
-    console.log(newArr);
-    newArr.forEach(element=>{
-      if (element.keyword===selectedValue) {
-          
-        }
-    });
-    for (let i = 0; i < newArr.length; i++) {
-        // $('ul').append(`<li><img src=${newArr[i].image_url}></li>`);
+    $('ul').empty();
+    for(let i =0 ; i<Things.all.length;i++){
+      if(Things.all[i].keyword===selectedValue){
+        Things.all[i].render();
+      }
     }
-});
+
+  });
 
 
 
