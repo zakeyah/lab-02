@@ -41,14 +41,19 @@ $(document).ready(function () {
       });
     });
 
-  $('select').on('click', function() {
+  $('select').on('change', function() {
     let selectedValue = $(this).val();
     $('ul').empty();
-    for(let i =0 ; i<Things.all.length;i++){
-      if(Things.all[i].keyword===selectedValue){
-        Things.all[i].render();
+    // for(let i =0 ; i<Things.all.length;i++){
+    //   if(Things.all[i].keyword===selectedValue){
+    //     Things.all[i].render();
+    //   }
+    // }
+    Things.all.forEach(elment=>{
+      if(elment.keyword===selectedValue){
+        elment.render();
       }
-    }
+    });
 
   });
 
