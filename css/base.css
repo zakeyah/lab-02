@@ -2,3 +2,6 @@ body{
     font-family: 'Roboto', sans-serif;
     background-color: #eee;
 }
+main{
+    float: left;
+}
