@@ -32,7 +32,7 @@ $(document).ready(function () {
     dataType: 'json'
   };
 
-  $.ajax('../data/page-1.json', ajaxSettings)
+  $.ajax('./../data/page-1.json', ajaxSettings)
     .then(data => {
       data.forEach(images => {
         let item = new Things(images);
