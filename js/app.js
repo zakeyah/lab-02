@@ -60,7 +60,6 @@ $(document).ready(function () {
     $('select').empty();
     $('ul').empty();
     // Things.all.forEach(item=>{
-     
     //   // $('ul').append(elment.render());
     //   // elment.renderOptions();
     //   console.log(item.renderOptions());
@@ -73,7 +72,6 @@ $(document).ready(function () {
     // $('select').empty();
     $('ul').empty();
     // Things.all.forEach(elment=>{
-     
     //   // $('ul').append(elment.render());
     //   elment.renderOptions();
     // });
