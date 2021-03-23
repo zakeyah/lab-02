@@ -31,6 +31,7 @@ $(document).ready(function () {
     method: 'get',
     dataType: 'json'
   };
+
   const chosePage = num =>{
     $.ajax(`../data/page-${num}.json`, ajaxSettings)
       .then(data => {
@@ -39,7 +40,7 @@ $(document).ready(function () {
           $('ul').append(item.render());
           item.renderOptions();
         });
-      });
+
 
   };
   chosePage(1);
