@@ -1,5 +1,6 @@
-'use strect';
+'use strict';
 const keywordsArr=[];
+
 
 function Things (item){
   this.title=item.title,
@@ -10,12 +11,11 @@ function Things (item){
 }
 Things.all=[];
 console.log(Things.all);
+
 Things.prototype.render= function(){
-  $('ul').append(`<li>
-             <h2>${this.title}</h2>
-            <img src="${this.image_url}" alt="">
-            <p>${this.description}</p>
-            </li>`);
+  let template = $('#item-templet').html();
+  let newItem = Mustache.render(template, this);
+  return newItem;
 };
 
 Things.prototype.renderOptions= function(){
@@ -31,31 +31,57 @@ $(document).ready(function () {
     method: 'get',
     dataType: 'json'
   };
-
-  $.ajax('../data/page-1.json', ajaxSettings)
-    .then(data => {
-      data.forEach(images => {
-        let item = new Things(images);
-        item.render();
-        item.renderOptions();
+  const chosePage = num =>{
+    $.ajax(`../data/page-${num}.json`, ajaxSettings)
+      .then(data => {
+        data.forEach(images => {
+          let item = new Things(images);
+          $('ul').append(item.render());
+          item.renderOptions();
+        });
       });
-    });
 
+  };
+  chosePage(1);
   $('select').on('change', function() {
     let selectedValue = $(this).val();
     $('ul').empty();
-    // for(let i =0 ; i<Things.all.length;i++){
-    //   if(Things.all[i].keyword===selectedValue){
-    //     Things.all[i].render();
-    //   }
-    // }
     Things.all.forEach(elment=>{
       if(elment.keyword===selectedValue){
-        elment.render();
+        $('ul').append(elment.render());
       }
     });
 
   });
+
+  $('#page1').on('click', function(event) {
+    event.preventDefault();
+    chosePage(1);
+    $('select').empty();
+    $('ul').empty();
+    // Things.all.forEach(item=>{
+     
+    //   // $('ul').append(elment.render());
+    //   // elment.renderOptions();
+    //   console.log(item.renderOptions());
+    // });
+
+  });
+
+  $('#page2').on('click', function() {
+    chosePage(2);
+    // $('select').empty();
+    $('ul').empty();
+    // Things.all.forEach(elment=>{
+     
+    //   // $('ul').append(elment.render());
+    //   elment.renderOptions();
+    // });
+
+  });
+
+
+
 
 
 
