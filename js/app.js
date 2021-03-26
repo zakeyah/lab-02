@@ -58,18 +58,22 @@ $(document).ready(function () {
     method: 'get',
     dataType: 'json'
   };
+
   const chosePage = num => {
     Things.all = [];
     keywordsArr = [];
     $.ajax(`./../data/page-${num}.json`, ajaxSettings)
+
       .then(data => {
         data.forEach(images => {
           let item = new Things(images);
           $('ul').append(item.render());
           item.renderOptions();
         });
+
         console.log('befor', Things.all);
       });
+
 
   };
   chosePage(1);
