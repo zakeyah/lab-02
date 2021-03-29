@@ -62,7 +62,7 @@ $(document).ready(function () {
   const chosePage = num => {
     Things.all = [];
     keywordsArr = [];
-    $.ajax(`./../data/page-${num}.json`, ajaxSettings)
+    $.ajax(`../../data/page-${num}.json`, ajaxSettings)
 
       .then(data => {
         data.forEach(images => {
